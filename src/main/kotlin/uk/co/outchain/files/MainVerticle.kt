@@ -24,6 +24,14 @@ class MainVerticle : AbstractVerticle() {
                             .setConfig(config)
                             .setInstances(1)
                     )
+                    .flatMap {
+                        vertx.rxDeployVerticle(
+                            "uk.co.outchain.files.server.ServerVerticle",
+                            DeploymentOptions()
+                                .setConfig(config)
+                                .setInstances(1)
+                        )
+                    }
             }
             .subscribeBy(
                 onSuccess = {
