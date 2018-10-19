@@ -1,3 +1,4 @@
 {
-  "http.server.port": 50002
+  "http.server.port": 50002,
+  "node.name": "Node 2"
 }

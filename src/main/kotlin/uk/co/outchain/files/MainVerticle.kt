@@ -26,7 +26,7 @@ class MainVerticle : AbstractVerticle() {
                     )
                     .flatMap {
                         vertx.rxDeployVerticle(
-                            "uk.co.outchain.files.server.ServerVerticle",
+                            "uk.co.outchain.files.server.NodeServerVerticle",
                             DeploymentOptions()
                                 .setConfig(config)
                                 .setInstances(1)

@@ -5,8 +5,7 @@ import io.vertx.core.DeploymentOptions
 import io.vertx.core.Vertx
 import io.vertx.core.json.JsonObject
 import io.vertx.junit5.VertxTestContext
-import uk.co.outchain.files.server.ServerVerticle
-import java.io.File
+import uk.co.outchain.files.server.NodeServerVerticle
 import java.nio.file.Paths
 
 abstract class VertxTest {
@@ -14,7 +13,7 @@ abstract class VertxTest {
         Thread.currentThread().contextClassLoader
     }
 
-    protected fun deployNode(vertx: Vertx, testContext: VertxTestContext, name: String): Single<ServerVerticle> {
+    protected fun deployNode(vertx: Vertx, testContext: VertxTestContext, name: String): Single<NodeServerVerticle> {
         return Single.create { emitter ->
             val configPath = Paths.get("envs", name, "config.json")
             val stream = classloader.getResourceAsStream(configPath.toString())
@@ -33,7 +32,7 @@ abstract class VertxTest {
             config.put(Config.KEYS_DIRECTORY, keysUrl.file)
             config.put(Config.ROOT_DIRECTORY, rootUrl.file)
 
-            val verticle = ServerVerticle()
+            val verticle = NodeServerVerticle()
             val options = DeploymentOptions()
                 .setConfig(config)
                 .setInstances(1)

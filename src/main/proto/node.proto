@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "uk.co.outchain.files.proto";
+option java_outer_classname = "NodeProto";
+
+package node;
+
+service Node {
+    rpc Connect (ConnectRequest) returns (ConnectReply);
+}
+
+message ConnectRequest {
+}
+
+message ConnectReply {
+    bool success = 1;
+}
